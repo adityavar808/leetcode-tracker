@@ -1,18 +1,20 @@
-// Last updated: 8/4/2025, 10:19:33 PM
+// Last updated: 8/4/2025, 10:20:32 PM
 class Solution {
-  public int subarrayBitwiseORs(int[] arr) {
-    List<Integer> s = new ArrayList<>();
-    int l = 0;
+  public List<Integer> lexicalOrder(int n) {
+    List<Integer> ans = new ArrayList<>();
+    int curr = 1;
 
-    for (final int a : arr) {
-      final int r = s.size();
-      s.add(a);
-      for (int i = l; i < r; ++i)
-        if (s.get(s.size() - 1) != (s.get(i) | a))
-          s.add(s.get(i) | a);
-      l = r;
+    while (ans.size() < n) {
+      ans.add(curr);
+      if (curr * 10 <= n) {
+        curr *= 10;
+      } else {
+        while (curr % 10 == 9 || curr == n)
+          curr /= 10;
+        ++curr;
+      }
     }
 
-    return new HashSet<>(s).size();
+    return ans;
   }
 }
