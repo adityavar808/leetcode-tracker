@@ -1,20 +1,19 @@
-// Last updated: 8/4/2025, 10:20:32 PM
+// Last updated: 8/4/2025, 10:22:16 PM
 class Solution {
-  public List<Integer> lexicalOrder(int n) {
+  public int[] findEvenNumbers(int[] digits) {
     List<Integer> ans = new ArrayList<>();
-    int curr = 1;
+    int[] count = new int[10];
 
-    while (ans.size() < n) {
-      ans.add(curr);
-      if (curr * 10 <= n) {
-        curr *= 10;
-      } else {
-        while (curr % 10 == 9 || curr == n)
-          curr /= 10;
-        ++curr;
-      }
-    }
+    for (final int digit : digits)
+      ++count[digit];
 
-    return ans;
+    for (int a = 1; a <= 9; ++a)
+      for (int b = 0; b <= 9; ++b)
+        for (int c = 0; c <= 8; c += 2)
+          if (count[a] > 0 && count[b] > (b == a ? 1 : 0) &&
+              count[c] > (c == a ? 1 : 0) + (c == b ? 1 : 0))
+            ans.add(a * 100 + b * 10 + c);
+
+    return ans.stream().mapToInt(Integer::intValue).toArray();
   }
 }
