@@ -1,19 +1,16 @@
-// Last updated: 8/4/2025, 10:22:16 PM
+// Last updated: 8/4/2025, 10:23:20 PM
 class Solution {
-  public int[] findEvenNumbers(int[] digits) {
-    List<Integer> ans = new ArrayList<>();
-    int[] count = new int[10];
+  public long maximumTripletValue(int[] nums) {
+    long ans = 0;
+    int maxDiff = 0; 
+    int maxNum = 0;
 
-    for (final int digit : digits)
-      ++count[digit];
+    for (final int num : nums) {
+      ans = Math.max(ans, (long) maxDiff * num);
+      maxDiff = Math.max(maxDiff, maxNum - num); 
+      maxNum = Math.max(maxNum, num);
+    }
 
-    for (int a = 1; a <= 9; ++a)
-      for (int b = 0; b <= 9; ++b)
-        for (int c = 0; c <= 8; c += 2)
-          if (count[a] > 0 && count[b] > (b == a ? 1 : 0) &&
-              count[c] > (c == a ? 1 : 0) + (c == b ? 1 : 0))
-            ans.add(a * 100 + b * 10 + c);
-
-    return ans.stream().mapToInt(Integer::intValue).toArray();
+    return ans;
   }
 }
