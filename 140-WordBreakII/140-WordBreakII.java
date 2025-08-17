@@ -1,28 +1,29 @@
-// Last updated: 8/17/2025, 6:44:53 PM
-class Solution {
-    public List<String> wordBreak(String s, List<String> wordDict) {
-        List<String> result = new ArrayList<>();
-        backtrack(s, wordDict, result, 0, new StringBuilder());
-        return result;
-    }
+// Last updated: 8/17/2025, 6:53:58 PM
+class MinStack {
+    private List<int[]> st;
 
-    private void backtrack(String s, List<String> wordDict, List<String> result, int startIndex,
-            StringBuilder currentSentence) {
-        if (startIndex == s.length()) {
-            result.add(new String(currentSentence));
-            return;
+    public MinStack() {
+        st = new ArrayList<>();
+    }
+    
+    public void push(int val) {
+        int[] top = st.isEmpty() ? new int[]{val, val} : st.get(st.size() - 1);
+        int min_val = top[1];
+        if (min_val > val) {
+            min_val = val;
         }
-        for (String word : wordDict) {
-            if (s.startsWith(word, startIndex)) {
-                int originalLength = currentSentence.length();
-                if (originalLength > 0) {
-                    currentSentence.append(" ");
-                }
-                currentSentence.append(word);
-                backtrack(s, wordDict, result, startIndex + word.length(), currentSentence);
-                //set back to original length
-                currentSentence.setLength(originalLength);
-            }
-        }
+        st.add(new int[]{val, min_val});        
+    }
+    
+    public void pop() {
+        st.remove(st.size() - 1);
+    }
+    
+    public int top() {
+        return st.isEmpty() ? -1 : st.get(st.size() - 1)[0];
+    }
+    
+    public int getMin() {
+        return st.isEmpty() ? -1 : st.get(st.size() - 1)[1];
     }
 }
