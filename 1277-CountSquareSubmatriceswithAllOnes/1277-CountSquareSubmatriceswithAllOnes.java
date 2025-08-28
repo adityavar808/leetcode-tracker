@@ -1,6 +1,7 @@
-// Last updated: 8/28/2025, 11:26:26 PM
-class Solution {
-    public boolean isPowerOfFour(int n) {
-        return n > 0 && (n & (n - 1)) == 0 && (n & 0x55555555) != 0;
+// Last updated: 8/29/2025, 12:02:09 AM
+public class Solution {
+    public boolean isPowerOfThree(int n) {
+        int maxPowerOf3 = 1162261467; // 3^19 is the largest power of 3 in int range
+        return n > 0 && maxPowerOf3 % n == 0;
     }
 }
