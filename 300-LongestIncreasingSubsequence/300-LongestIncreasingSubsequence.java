@@ -1,19 +1,20 @@
-// Last updated: 8/30/2025, 12:03:08 AM
+// Last updated: 8/30/2025, 12:04:45 AM
 class Solution {
-    public int longestSubstring(String s, int k) {
-        int n = s.length();
-        int[] freq = new int[26];
-        for (char ch : s.toCharArray()) {
-            freq[ch - 'a']++;
+    public int maxRotateFunction (int[] A) {
+        if (A == null || A.length == 0)
+            return 0;
+        int sum = 0, F0 = 0, max = Integer.MIN_VALUE;
+        for (int i = 0; i < A.length; i++) {
+            sum += A [i];
+            F0 += i * A [i];
         }
-
-        for (int i = 0; i < n; i++) {
-            if (freq[s.charAt(i) - 'a'] < k) {
-                int left = longestSubstring(s.substring(0, i), k);
-                int right = longestSubstring(s.substring(i + 1), k);
-                return Math.max(left, right);
-            }
+        int dp [] = new int [A.length];
+        dp [0] = F0;
+        max = dp [0];
+        for (int i = 1; i < A.length; i++) {
+            dp [i] = dp [i-1] + sum - A.length * A [A.length - i];
+            max = Math.max (max, dp [i]);
         }
-        return n;
+        return max;
     }
 }
