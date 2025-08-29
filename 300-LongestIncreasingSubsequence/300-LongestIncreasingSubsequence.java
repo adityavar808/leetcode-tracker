@@ -1,35 +1,19 @@
-// Last updated: 8/30/2025, 12:02:31 AM
+// Last updated: 8/30/2025, 12:03:08 AM
 class Solution {
-    public int lengthOfLIS(int[] nums) {
-        List<Integer> res = new ArrayList<>();
-
-        for (int n : nums) {
-            if (res.isEmpty() || res.get(res.size() - 1) < n) {
-                res.add(n);
-            } else {
-                int idx = binarySearch(res, n);
-                res.set(idx, n);
-            }
+    public int longestSubstring(String s, int k) {
+        int n = s.length();
+        int[] freq = new int[26];
+        for (char ch : s.toCharArray()) {
+            freq[ch - 'a']++;
         }
 
-        return res.size();        
+        for (int i = 0; i < n; i++) {
+            if (freq[s.charAt(i) - 'a'] < k) {
+                int left = longestSubstring(s.substring(0, i), k);
+                int right = longestSubstring(s.substring(i + 1), k);
+                return Math.max(left, right);
+            }
+        }
+        return n;
     }
-
-    private int binarySearch(List<Integer> arr, int target) {
-        int left = 0;
-        int right = arr.size() - 1;
-
-        while (left <= right) {
-            int mid = (left + right) / 2;
-            if (arr.get(mid) == target) {
-                return mid;
-            } else if (arr.get(mid) > target) {
-                right = mid - 1;
-            } else {
-                left = mid + 1;
-            }
-        }
-
-        return left;
-    }    
 }
