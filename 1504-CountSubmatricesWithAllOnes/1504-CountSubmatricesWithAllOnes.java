@@ -1,25 +1,28 @@
-// Last updated: 8/30/2025, 12:42:53 PM
+// Last updated: 8/30/2025, 12:43:34 PM
 class Solution {
-    public int numSubmat(int[][] mat) {
-        int n = mat.length , m = mat[0].length;
-        int[][] width = new int[n][m];
-        int res = 0;
-        
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (mat[i][j] == 1) width[i][j] = (j == 0 ? 0 : width[i][j - 1]) + 1;
+    public long zeroFilledSubarray(int[] nums) {
+        int n=nums.length;
+        ArrayList<Integer> list=new ArrayList<>();
+        int count=1;
+        for(int i=1;i<n;i++){
+            if(nums[i]==nums[i-1] && nums[i]==0){
+                count++;
+            }
+            else if(nums[i-1]==0){
+                list.add(count);
+                count=1;
             }
         }
-        
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                int minWidth = width[i][j];
-                for (int k = i; k >= 0 && minWidth > 0; k--) {
-                    minWidth = Math.min(minWidth , width[k][j]);
-                    res += minWidth;
-                }
+        if(nums[n-1]==0){
+            list.add(count);
+        }
+        long sum=0;
+        for(int num:list){
+            while(num>=1){
+                sum+=num;
+                num--;
             }
         }
-        return res;
+        return sum;
     }
 }
