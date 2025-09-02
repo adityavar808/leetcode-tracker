@@ -1,16 +1,14 @@
-// Last updated: 9/2/2025, 10:34:35 PM
+// Last updated: 9/2/2025, 10:34:54 PM
 class Solution {
-    public boolean isSubsequence(String s, String t) {
-        int sp = 0;
-        int tp = 0;
-
-        while (sp < s.length() && tp < t.length()) {
-            if (s.charAt(sp) == t.charAt(tp)) {
-                sp++;
-            }
-            tp++;
+    public int[] constructRectangle(int area) {
+        int W = (int) Math.sqrt(area);
+        
+        while (area % W != 0) {
+            W--;
         }
-
-        return sp == s.length();        
+        
+        int L = area / W;
+        
+        return new int[]{L, W};
     }
 }
