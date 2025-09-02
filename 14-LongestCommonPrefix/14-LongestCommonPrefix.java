@@ -1,14 +1,16 @@
-// Last updated: 8/4/2025, 1:00:28 AM
+// Last updated: 9/2/2025, 10:34:35 PM
 class Solution {
-  public String longestCommonPrefix(String[] strs) {
-    if (strs.length == 0)
-      return "";
+    public boolean isSubsequence(String s, String t) {
+        int sp = 0;
+        int tp = 0;
 
-    for (int i = 0; i < strs[0].length(); ++i)
-      for (int j = 1; j < strs.length; ++j)
-        if (i == strs[j].length() || strs[j].charAt(i) != strs[0].charAt(i))
-          return strs[0].substring(0, i);
+        while (sp < s.length() && tp < t.length()) {
+            if (s.charAt(sp) == t.charAt(tp)) {
+                sp++;
+            }
+            tp++;
+        }
 
-    return strs[0];
-  }
+        return sp == s.length();        
+    }
 }
