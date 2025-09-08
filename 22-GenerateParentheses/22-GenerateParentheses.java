@@ -1,25 +1,19 @@
-// Last updated: 8/4/2025, 1:00:18 AM
+// Last updated: 9/8/2025, 1:50:33 PM
 class Solution {
     public List<String> generateParenthesis(int n) {
-        List<String> res = new ArrayList<>();
-
-        dfs(0, 0, "", n, res);
-
-        return res;        
+        List<String> ll = new ArrayList<>();
+        generate_Paranthesis(n, 0, 0, "", ll);
+        return ll;
     }
-
-    private void dfs(int openP, int closeP, String s, int n, List<String> res) {
-        if (openP == closeP && openP + closeP == n * 2) {
-            res.add(s);
+    public static void generate_Paranthesis(int n, int open, int close, String ans, List<String> ll){
+        if(open == n && close == n){
+            ll.add(ans);
             return;
         }
-
-        if (openP < n) {
-            dfs(openP + 1, closeP, s + "(", n, res);
+        if(open > n || close > open){
+            return;
         }
-
-        if (closeP < openP) {
-            dfs(openP, closeP + 1, s + ")", n, res);
-        }
-    }    
+        generate_Paranthesis(n, open + 1, close, ans + "(", ll);
+        generate_Paranthesis(n, open, close + 1, ans + ")", ll);
+    }
 }
