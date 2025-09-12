@@ -1,4 +1,4 @@
-// Last updated: 9/12/2025, 11:50:50 AM
+// Last updated: 9/12/2025, 12:56:21 PM
 class Solution {
     public int subarraySum(int[] nums, int k) {
         int count = 0;
@@ -6,7 +6,7 @@ class Solution {
             int sum = 0;
             for(int j = i; j < nums.length; j++){
                 sum += nums[j];
-                if(sum == k){
+            if(sum == k){
                 count++;
             }
             }
