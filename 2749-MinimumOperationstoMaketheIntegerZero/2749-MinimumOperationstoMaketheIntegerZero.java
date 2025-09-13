@@ -1,15 +1,21 @@
-// Last updated: 9/13/2025, 8:11:26 PM
+// Last updated: 9/13/2025, 8:11:54 PM
 class Solution {
-    public int makeTheIntegerZero(int num1, int num2) {
-        for (int k = 1; k <= 60; k++) {
-            long x = 1L * num1 - 1L * num2 * k;
-            if (x < k) {
-                return -1;
-            }
-            if (k >= Long.bitCount(x)) {
-                return k;
-            }
+    static long expSum4[]=new long[18];
+    static long expSum(int x){
+        if (x==0) return 0;
+        int log4=(31-Integer.numberOfLeadingZeros(x))>>1;
+        int r=x-(1<<(log4<<1));
+        return expSum4[log4]+r*(log4+1L);
+    }
+    static public long minOperations(int[][] queries) {
+        expSum4[0]=1;
+        for(int i=1; i<18; i++)
+            expSum4[i]=expSum4[i-1]+3L*i*(1L<<(2*(i-1)))+1;
+        long op=0;
+        for(int[] q : queries){
+            int l=q[0]-1, r=q[1];
+            op+=(expSum(r)-expSum(l)+1)>>1;
         }
-        return -1;
+        return op;
     }
 }
