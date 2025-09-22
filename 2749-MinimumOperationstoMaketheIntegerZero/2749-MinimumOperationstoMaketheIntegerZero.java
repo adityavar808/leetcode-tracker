@@ -1,4 +1,4 @@
-// Last updated: 9/16/2025, 4:57:12 PM
+// Last updated: 9/23/2025, 1:22:54 AM
 class Solution {
     public int makeTheIntegerZero(int num1, int num2) {
         for (int k = 1; k <= 60; k++) {
