@@ -1,4 +1,4 @@
-// Last updated: 9/23/2025, 7:15:49 PM
+// Last updated: 9/23/2025, 7:16:05 PM
 class Solution {
     public int compareVersion(String version1, String version2) {
         String[] v1 = version1.split("\\.");
