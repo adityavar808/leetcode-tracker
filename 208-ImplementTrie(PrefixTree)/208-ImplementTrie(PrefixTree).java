@@ -1,6 +1,6 @@
-// Last updated: 9/24/2025, 11:29:28 AM
+// Last updated: 9/24/2025, 11:29:41 AM
 class TrieNode {
-    TrieNode[] children = new TrieNode[26];  // Fixed array for a-z
+    TrieNode[] children = new TrieNode[26]; 
     boolean isEnd = false;
 }
 
