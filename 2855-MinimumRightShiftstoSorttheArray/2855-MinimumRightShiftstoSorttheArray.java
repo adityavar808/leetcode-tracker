@@ -1,17 +1,19 @@
-// Last updated: 10/5/2025, 11:09:18 AM
-   class Solution {
-          public int minimumRightShifts(List<Integer> nums) {
-              int ind = 0, c = 0;
-              for(int i = 1; i<nums.size(); i++){
-                  if(nums.get(i - 1) > nums.get(i)){ 
-                       ind = i;
-                       c++;
-                  }
+// Last updated: 10/5/2025, 11:09:51 AM
+class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> row = new ArrayList<>();
+        row.add(1);
+
+        for (int i = 0; i < rowIndex; i++) {
+            List<Integer> newRow = new ArrayList<>();
+            newRow.add(1);
+            for (int j = 1; j < row.size(); j++) {
+                newRow.add(row.get(j - 1) + row.get(j));
             }
-            if(c > 1){
-               return -1;
-           }
-           if(ind == 0){   return 0;  }
-           return nums.get(nums.size() - 1) > nums.get(0) ? -1 : nums.size() - ind; 
-           }
-       }
+            newRow.add(1);
+            row = newRow;
+        }
+
+        return row;        
+    }
+}
